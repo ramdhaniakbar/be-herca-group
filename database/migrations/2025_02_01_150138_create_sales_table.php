@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('marketing_id')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->string('transaction_number');
+            $table->date('date');
+            $table->integer('cargo_fee');
+            $table->integer('total_balance');
+            $table->integer('grand_total');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
