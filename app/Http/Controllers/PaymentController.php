@@ -32,18 +32,18 @@ class PaymentController extends Controller
             $transaction = Transaction::findOrFail($request->transaction_id);
 
             $total_amount = (int) $transaction->total_balance;
-            $total_paid = (int) Payment::where('transaction_id', $transaction->id)->sum('amount_paid');
-            $remaining_balance = $total_amount - ($total_paid + $request->amount_paid);
-
-            if ($remaining_balance > 0) {
-                $status = 'partially_paid';
-            } elseif ($remaining_balance == 0) {
-                $status = 'paid';
-            } else {
+            if ($request->amount_paid > $total_amount) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Pembayaran melebihi jumlah tagihan'
                 ], 400);
+            }
+
+            $remaining_balance = $total_amount - $request->amount_paid;
+            if ($remaining_balance > 0) {
+                $status = 'partially_paid';
+            } elseif ($remaining_balance == 0) {
+                $status = 'paid';
             }
 
             $payment = Payment::create([
