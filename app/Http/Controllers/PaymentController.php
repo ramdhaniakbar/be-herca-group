@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
+    public function index()
+    {
+        $payments = Payment::with('transaction')->paginate(10);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $payments
+        ]);
+    }
+
     public function make_payment(Request $request)
     {
         $request->validate([

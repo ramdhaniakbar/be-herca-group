@@ -21,9 +21,11 @@ class TransactionController extends Controller
     public function commission_calculation()
     {
         $calculations = DB::table('transactions')
+                ->leftJoin('marketings', 'transactions.marketing_id', '=', 'marketings.id')
                 ->select(
                     DB::raw("DATE_FORMAT(date, '%M') as month"),
-                    'marketing_id',
+                    'transactions.marketing_id',
+                    'marketings.name as marketing_name',
                     DB::raw("SUM(grand_total) as omzet"),
                     DB::raw("
                         CASE 

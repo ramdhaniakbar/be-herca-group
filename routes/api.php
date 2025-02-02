@@ -13,4 +13,5 @@ Route::get('/user', function (Request $request) {
 Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 Route::get('/calculation-transactions', [TransactionController::class, 'commission_calculation'])->name('calculation.transactions');
 
-Route::post('/payments', [PaymentController::class, 'make_payment'])->name('payment.store');
+Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+Route::post('/payments', [PaymentController::class, 'make_payment'])->name('payments.store');
