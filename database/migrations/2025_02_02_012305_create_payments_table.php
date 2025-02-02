@@ -19,7 +19,6 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table->bigInteger('amount_paid');
             $table->bigInteger('remaining_balance');
-            $table->enum('status', ['pending', 'partially_paid', 'paid'])->default('pending');
             $table->date('payment_date');
             $table->timestamps();
             $table->softDeletes();

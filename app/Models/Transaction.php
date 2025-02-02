@@ -16,7 +16,8 @@ class Transaction extends Model
         'date',
         'cargo_fee',
         'total_balance',
-        'grand_total'
+        'grand_total',
+        'status'
     ];
 
     protected $dates = [

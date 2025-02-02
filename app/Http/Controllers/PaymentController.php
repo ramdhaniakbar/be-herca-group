@@ -42,13 +42,15 @@ class PaymentController extends Controller
                 'amount_paid' => $request->amount_paid,
                 'previous_balance' => $previous_balance,
                 'remaining_balance' => $remaining_balance,
-                'status' => $status,
                 'payment_date' => now()->format('Y-m-d')
             ]);
 
             // mengurangi total_balance dan grand_total di transactions
             $transaction->decrement('total_balance', $request->amount_paid);
             $transaction->decrement('grand_total', $request->amount_paid);
+
+            // change status transaction
+            $transaction->update(['status' => $status]);
 
             DB::commit();
 

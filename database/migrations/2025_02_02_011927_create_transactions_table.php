@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('cargo_fee');
             $table->bigInteger('total_balance');
             $table->bigInteger('grand_total');
+            $table->enum('status', ['pending', 'partially_paid', 'paid'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });
