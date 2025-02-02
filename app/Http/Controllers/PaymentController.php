@@ -31,10 +31,9 @@ class PaymentController extends Controller
         try {
             $transaction = Transaction::findOrFail($request->transaction_id);
 
-            $total_amount = (int) $transaction->grand_total;
+            $total_amount = (int) $transaction->total_balance;
             $total_paid = (int) Payment::where('transaction_id', $transaction->id)->sum('amount_paid');
             $remaining_balance = $total_amount - ($total_paid + $request->amount_paid);
-            $previous_balance = (int) $transaction->total_balance; 
 
             if ($remaining_balance > 0) {
                 $status = 'partially_paid';
@@ -50,7 +49,7 @@ class PaymentController extends Controller
             $payment = Payment::create([
                 'transaction_id' => $transaction->id,
                 'amount_paid' => $request->amount_paid,
-                'previous_balance' => $previous_balance,
+                'previous_balance' => $total_amount,
                 'remaining_balance' => $remaining_balance,
                 'payment_date' => now()->format('Y-m-d')
             ]);
