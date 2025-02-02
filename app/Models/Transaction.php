@@ -31,4 +31,9 @@ class Transaction extends Model
         'total_balance' => 'integer',
         'grand_total' => 'integer',
     ];
+
+    public function marketing()
+    {
+        return $this->belongsTo(Marketing::class);
+    }
 }

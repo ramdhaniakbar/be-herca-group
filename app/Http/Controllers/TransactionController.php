@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+    public function index()
+    {
+        $transactions = Transaction::with('marketing')->paginate(10);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $transactions
+        ]);
+    }
+
     public function commission_calculation()
     {
         $calculations = DB::table('transactions')
@@ -34,7 +45,7 @@ class TransactionController extends Controller
                 ->groupBy(DB::raw("DATE_FORMAT(date, '%M')"), 'marketing_id')
                 ->orderBy(DB::raw("DATE_FORMAT(date, '%M')"), 'desc')
                 ->orderBy('marketing_id', 'asc')
-                ->get();
+                ->paginate(10);
         
         return response()->json([
             'status' => 'success',
