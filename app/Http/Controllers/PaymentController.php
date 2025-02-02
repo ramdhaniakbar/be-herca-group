@@ -23,7 +23,7 @@ class PaymentController extends Controller
     {
         $request->validate([
             'transaction_id' => 'required|exists:transactions,id',
-            'amount_paid' => 'required|integer|min:1',
+            'amount_paid' => 'required|integer|min:10000',
         ]);
 
         DB::beginTransaction();
