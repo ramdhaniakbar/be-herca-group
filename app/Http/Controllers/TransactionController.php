@@ -10,7 +10,7 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::with('marketing')->paginate(10);
+        $transactions = Transaction::with('marketing')->get();
 
         return response()->json([
             'status' => 'success',
@@ -47,7 +47,7 @@ class TransactionController extends Controller
                 ->groupBy(DB::raw("DATE_FORMAT(date, '%M')"), 'marketing_id')
                 ->orderBy(DB::raw("DATE_FORMAT(date, '%M')"), 'desc')
                 ->orderBy('marketing_id', 'asc')
-                ->paginate(10);
+                ->get();
         
         return response()->json([
             'status' => 'success',

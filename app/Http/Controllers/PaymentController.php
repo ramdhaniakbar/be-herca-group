@@ -11,7 +11,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::with('transaction')->paginate(10);
+        $payments = Payment::with('transaction')->get();
 
         return response()->json([
             'status' => 'success',
