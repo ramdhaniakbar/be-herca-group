@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
 
-class SaleSeeder extends Seeder
+class TransactionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class SaleSeeder extends Seeder
     public function run(): void
     {
         // create sale seeder
-        DB::table('sales')->insert([
+        DB::table('transactions')->insert([
             [
                 'marketing_id' => 1,
                 'transaction_number' => 'TRX001',

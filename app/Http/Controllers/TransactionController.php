@@ -2,55 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SaleController extends Controller
+class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Sale $sale)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Sale $sale)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Sale $sale)
-    {
-        //
-    }
-
     public function commission_calculation()
     {
-        $calculations = DB::table('sales')
+        $calculations = DB::table('transactions')
                 ->select(
                     DB::raw("DATE_FORMAT(date, '%M') as month"),
                     'marketing_id',

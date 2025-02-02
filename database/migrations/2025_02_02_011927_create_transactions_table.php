@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('marketing_id')
                     ->constrained()
@@ -19,9 +19,9 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table->string('transaction_number');
             $table->date('date');
-            $table->integer('cargo_fee');
-            $table->integer('total_balance');
-            $table->integer('grand_total');
+            $table->bigInteger('cargo_fee');
+            $table->bigInteger('total_balance');
+            $table->bigInteger('grand_total');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('transactions');
     }
 };
